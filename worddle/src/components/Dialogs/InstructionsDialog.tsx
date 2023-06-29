@@ -1,6 +1,6 @@
 import React from "react";
 import DialogContainer from "./DialogContainer";
-import Tile from "../Board/Tile";
+import Tile from "../GameScreen/Tile";
 import MainButton from "../Common/MainButton";
 
 const InstructionsDialog = () => {
@@ -35,10 +35,10 @@ const Examples = () => {
       <div className="mb-[6px] mt-[23px]">
         <div className="flex gap-x-[11px]">
           <Tile letter="G" status={1} />
-          <Tile letter="A" status={0} />
-          <Tile letter="T" status={0} />
-          <Tile letter="O" status={0} />
-          <Tile letter="S" status={0} />
+          <Tile letter="A" status={4} />
+          <Tile letter="T" status={4} />
+          <Tile letter="O" status={4} />
+          <Tile letter="S" status={4} />
         </div>
         <div className="mt-[19px] text-[19px]">
           La letra <span className="font-bold">G</span> está en la palabra y en la posición
@@ -47,11 +47,11 @@ const Examples = () => {
       </div>
       <div className="mb-[6px] mt-[23px]">
         <div className="flex gap-x-[11px]">
-          <Tile letter="V" status={0} />
-          <Tile letter="O" status={0} />
+          <Tile letter="V" status={4} />
+          <Tile letter="O" status={4} />
           <Tile letter="C" status={2} />
-          <Tile letter="A" status={0} />
-          <Tile letter="L" status={0} />
+          <Tile letter="A" status={4} />
+          <Tile letter="L" status={4} />
         </div>
         <div className="mt-[19px] text-[19px]">
           La letra <span className="font-bold">C</span> está en la palabra pero en la posición
@@ -60,10 +60,10 @@ const Examples = () => {
       </div>
       <div className="mb-[6px] mt-[23px]">
         <div className="flex gap-x-[11px]">
-          <Tile letter="C" status={0} />
-          <Tile letter="A" status={0} />
-          <Tile letter="N" status={0} />
-          <Tile letter="T" status={0} />
+          <Tile letter="C" status={4} />
+          <Tile letter="A" status={4} />
+          <Tile letter="N" status={4} />
+          <Tile letter="T" status={4} />
           <Tile letter="O" status={3} />
         </div>
         <div className="mt-[19px] text-[19px]">
