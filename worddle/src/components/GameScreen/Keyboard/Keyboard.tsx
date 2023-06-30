@@ -54,10 +54,10 @@ const Keyboard = (p: { gameState: GameType; dispatch: React.Dispatch<GameActionT
     for (let i = 0; i < 5; i++) {
       if (boardTiles[currentTry][i].tileStatus !== 1) {
         isVictory = false;
-        return;
       }
     }
     if (isVictory) {
+      p.dispatch({ type: "hasWonRound", value: true });
       p.dispatch({ type: "winScore", value: p.gameState.winScore + 1 });
       p.dispatch({ type: "gameNumber", value: p.gameState.gameNumber + 1 });
       p.dispatch({ type: "showStats", value: true });
@@ -66,6 +66,7 @@ const Keyboard = (p: { gameState: GameType; dispatch: React.Dispatch<GameActionT
       if (currentTry === 4) {
         p.dispatch({ type: "gameNumber", value: p.gameState.gameNumber + 1 });
         p.dispatch({ type: "showStats", value: true });
+        p.dispatch({ type: "showWord", value: true });
         // p.setShowStats(true);
       }
     }

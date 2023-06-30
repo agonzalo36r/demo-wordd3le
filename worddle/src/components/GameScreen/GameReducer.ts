@@ -57,6 +57,18 @@ export function gameReducer(state: GameType, action: GameActionType) {
         showStats: action.value as boolean,
       };
     }
+    case "showWord": {
+      return {
+        ...state,
+        showWord: action.value as boolean,
+      };
+    }
+    case "hasWonRound": {
+      return {
+        ...state,
+        hasWonRound: action.value as boolean,
+      };
+    }
     case "newWord": {
       const copyTiles = JSON.parse(JSON.stringify(boardDefaultState));
       console.log(copyTiles);
@@ -67,6 +79,8 @@ export function gameReducer(state: GameType, action: GameActionType) {
         currentIndex: 0 as number,
         currentTry: 0 as number,
         showStats: false,
+        hasWonRound: false,
+        showWord: false,
         //newword
       };
     }
@@ -97,6 +111,8 @@ export type GameType = {
   gameNumber: number;
   showInstructions: boolean;
   showStats: boolean;
+  hasWonRound: boolean;
+  showWord: boolean;
 };
 
 export const defaultGame: GameType = {
@@ -109,4 +125,6 @@ export const defaultGame: GameType = {
   gameNumber: 0,
   showInstructions: false,
   showStats: false,
+  hasWonRound: false,
+  showWord: false,
 };
