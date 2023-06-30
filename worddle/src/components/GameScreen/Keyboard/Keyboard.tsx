@@ -3,24 +3,7 @@ import { DeleteKey, EnterKey, WordleKey } from "./Key";
 import { TileType } from "../Board/Board";
 import { GameActionType, GameType } from "../GameReducer";
 
-const Keyboard = (p: {
-  gameState: GameType;
-  // currentTry: number;
-  // currentIndex: number;
-  // boardTiles: TileType[][];
-  // currentWord: string;
-  dispatch: React.Dispatch<GameActionType>;
-  // setCurrentTry: Dispatch<SetStateAction<number>>;
-  // setCurrentIndex: Dispatch<SetStateAction<number>>;
-  // setBoardTiles: Dispatch<
-  //   SetStateAction<
-  //     {
-  //       tileValue: string;
-  //       tileStatus: number;
-  //     }[][]
-  //   >
-  // >;
-}) => {
+const Keyboard = (p: { gameState: GameType; dispatch: React.Dispatch<GameActionType> }) => {
   const handleKeyClick = (keyValue: string) => {
     if (p.gameState.currentIndex < 5 && p.gameState.currentTry < 5) {
       const localBoardTiles = [...p.gameState.boardTiles];
@@ -28,9 +11,7 @@ const Keyboard = (p: {
         tileValue: keyValue,
         tileStatus: 4,
       };
-      // p.setBoardTiles(localBoardTiles);
       p.dispatch({ type: "boardTiles", value: localBoardTiles });
-      // p.setCurrentIndex((p) => p + 1);
       p.dispatch({ type: "currentIndex", value: p.gameState.currentIndex + 1 });
     }
   };
@@ -42,10 +23,8 @@ const Keyboard = (p: {
         tileValue: "",
         tileStatus: 0,
       };
-      // p.setBoardTiles(localBoardTiles);
       p.dispatch({ type: "boardTiles", value: localBoardTiles });
       if (p.gameState.currentIndex > 0) {
-        // p.setCurrentIndex((p) => p - 1);
         p.dispatch({ type: "currentIndex", value: p.gameState.currentIndex - 1 });
       }
     }
@@ -54,10 +33,7 @@ const Keyboard = (p: {
   const handleEnterKey = () => {
     if (p.gameState.currentTry < 5) {
       gameCalculator();
-      // p.setCurrentTry((p) => p + 1);
       p.dispatch({ type: "currentTry", value: p.gameState.currentTry + 1 });
-
-      // p.setCurrentIndex((p) => 0);
       p.dispatch({ type: "currentIndex", value: 0 as number });
     }
   };
@@ -68,8 +44,6 @@ const Keyboard = (p: {
       p.gameState.currentTry,
       p.gameState.boardTiles
     );
-
-    // p.setBoardTiles((p) => updatedTiles);
     p.dispatch({ type: "boardTiles", value: updatedTiles });
   };
 
@@ -85,7 +59,6 @@ const Keyboard = (p: {
       console.log(localBoardTiles[currentTry][i].tileValue);
       while ((j = currentWord.indexOf(localBoardTiles[currentTry][i].tileValue, j + 1)) >= 0) {
         results.push(j);
-        console.log(results);
       }
       if (results.length === 0) {
         localBoardTiles[currentTry][i].tileStatus = 3;
