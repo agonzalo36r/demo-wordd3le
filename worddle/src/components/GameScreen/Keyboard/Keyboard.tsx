@@ -19,7 +19,7 @@ const Keyboard = (p: { gameState: GameType; dispatch: React.Dispatch<GameActionT
   const handleDeleteKey = () => {
     if (p.gameState.currentTry < 5) {
       const localBoardTiles = [...p.gameState.boardTiles];
-      localBoardTiles[p.gameState.currentTry][p.gameState.currentIndex + 1] = {
+      localBoardTiles[p.gameState.currentTry][p.gameState.currentIndex - 1] = {
         tileValue: "",
         tileStatus: 0,
       };
@@ -31,20 +31,44 @@ const Keyboard = (p: { gameState: GameType; dispatch: React.Dispatch<GameActionT
   };
 
   const handleEnterKey = () => {
-    if (p.gameState.currentTry < 5) {
-      gameCalculator();
+    if (p.gameState.currentTry < 5 && p.gameState.currentIndex === 5) {
+      roundCalculator();
       p.dispatch({ type: "currentTry", value: p.gameState.currentTry + 1 });
       p.dispatch({ type: "currentIndex", value: 0 as number });
     }
   };
 
-  const gameCalculator = () => {
+  const roundCalculator = () => {
     const updatedTiles = tileCalculator(
       p.gameState.currentWord,
       p.gameState.currentTry,
       p.gameState.boardTiles
     );
     p.dispatch({ type: "boardTiles", value: updatedTiles });
+    victoryCalculator(p.gameState.boardTiles, p.gameState.currentTry);
+  };
+
+  const victoryCalculator = (boardTiles: TileType[][], currentTry: number) => {
+    //
+    let isVictory = true;
+    for (let i = 0; i < 5; i++) {
+      if (boardTiles[currentTry][i].tileStatus !== 1) {
+        isVictory = false;
+        return;
+      }
+    }
+    if (isVictory) {
+      p.dispatch({ type: "winScore", value: p.gameState.winScore + 1 });
+      p.dispatch({ type: "gameNumber", value: p.gameState.gameNumber + 1 });
+      p.dispatch({ type: "showStats", value: true });
+      // p.setShowStats(true);
+    } else {
+      if (currentTry === 4) {
+        p.dispatch({ type: "gameNumber", value: p.gameState.gameNumber + 1 });
+        p.dispatch({ type: "showStats", value: true });
+        // p.setShowStats(true);
+      }
+    }
   };
 
   const tileCalculator = (
@@ -55,8 +79,6 @@ const Keyboard = (p: { gameState: GameType; dispatch: React.Dispatch<GameActionT
     let j = -1;
     const results = [];
     for (let i = 0; i < 5; i++) {
-      //
-      console.log(localBoardTiles[currentTry][i].tileValue);
       while ((j = currentWord.indexOf(localBoardTiles[currentTry][i].tileValue, j + 1)) >= 0) {
         results.push(j);
       }

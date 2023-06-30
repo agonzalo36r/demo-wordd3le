@@ -5,7 +5,7 @@ const Board = (p: { boardTiles: TileType[][]; currentWord: string }) => {
   // const [boardState, dispatch] = useReducer(boardReducer, boardDefaultState);
   const currentWord = "apple";
   return (
-    <div className="flex flex-col gap-y-[11px] py-5">
+    <div className="mx-auto flex flex-col gap-y-[11px] py-5">
       {p.boardTiles.map((boardRow, index) => (
         <div key={index} className="flex gap-x-[11px]">
           {boardRow.map((tile, index) => (

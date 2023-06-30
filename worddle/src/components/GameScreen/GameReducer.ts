@@ -45,6 +45,31 @@ export function gameReducer(state: GameType, action: GameActionType) {
         gameNumber: action.value as number,
       };
     }
+    case "showInstructions": {
+      return {
+        ...state,
+        showInstructions: action.value as boolean,
+      };
+    }
+    case "showStats": {
+      return {
+        ...state,
+        showStats: action.value as boolean,
+      };
+    }
+    case "newWord": {
+      const copyTiles = JSON.parse(JSON.stringify(boardDefaultState));
+      console.log(copyTiles);
+      return {
+        ...state,
+        boardTiles: copyTiles,
+        elapsedSeconds: 0 as number,
+        currentIndex: 0 as number,
+        currentTry: 0 as number,
+        showStats: false,
+        //newword
+      };
+    }
     case "reset": {
       return {
         ...defaultGame,
@@ -59,7 +84,7 @@ export function gameReducer(state: GameType, action: GameActionType) {
 }
 
 export type GameActionType = {
-  value: string | number | TileType[][];
+  value: string | number | TileType[][] | boolean;
   type: string;
 };
 export type GameType = {
@@ -70,6 +95,8 @@ export type GameType = {
   boardTiles: TileType[][];
   winScore: number;
   gameNumber: number;
+  showInstructions: boolean;
+  showStats: boolean;
 };
 
 export const defaultGame: GameType = {
@@ -77,7 +104,9 @@ export const defaultGame: GameType = {
   currentTry: 0,
   currentIndex: 0,
   elapsedSeconds: 0,
-  boardTiles: boardDefaultState,
+  boardTiles: JSON.parse(JSON.stringify(boardDefaultState)),
   winScore: 0,
   gameNumber: 0,
+  showInstructions: false,
+  showStats: false,
 };

@@ -1,8 +1,13 @@
 import React from "react";
 import DialogContainer from "./DialogContainer";
 import MainButton from "../Common/MainButton";
+import { GameActionType } from "../GameScreen/GameReducer";
 
-const StatsDialog = () => {
+const StatsDialog = (p: { dispatch: React.Dispatch<GameActionType> }) => {
+  const handleButton = () => {
+    //condicional is victory
+    p.dispatch({ type: "newWord", value: 0 });
+  };
   return (
     <DialogContainer>
       <div className="flex flex-col justify-center">
@@ -20,7 +25,7 @@ const StatsDialog = () => {
           <div className="text-[19px] uppercase">Siguiente palabra</div>
           <div className="text-[19px] font-bold">04:10</div>
         </div>
-        <MainButton text="Aceptar" />
+        <MainButton text="Aceptar" buttonAction={handleButton} />
       </div>
     </DialogContainer>
   );

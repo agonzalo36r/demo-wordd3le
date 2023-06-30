@@ -3,7 +3,10 @@ import DialogContainer from "./DialogContainer";
 import Tile from "../GameScreen/Tile";
 import MainButton from "../Common/MainButton";
 
-const InstructionsDialog = () => {
+const InstructionsDialog = (p: { dispatch: Function }) => {
+  const handleButton = () => {
+    p.dispatch({ type: "showInstructions", value: false });
+  };
   return (
     <DialogContainer>
       <div className="flex flex-col justify-center">
@@ -22,7 +25,7 @@ const InstructionsDialog = () => {
           margin="py-6"
         />
         <InstructionText text="¡Una palabra nueva cada 5 minutos!" center={true} margin="py-7" />
-        <MainButton text="¡Jugar!" />
+        <MainButton text="¡Jugar!" buttonAction={handleButton} />
       </div>
     </DialogContainer>
   );
