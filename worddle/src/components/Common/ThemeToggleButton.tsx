@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 
 const ThemeToggleButton = () => {
   const [mounted, setMounted] = useState(false);
@@ -15,12 +16,16 @@ const ThemeToggleButton = () => {
   }
 
   return (
-    <button
+    <div
       onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
-      className="rounded-lg bg-gray-800 p-2 text-base text-white transition-all duration-100 hover:bg-gray-600 dark:bg-gray-50 dark:text-gray-800 dark:hover:bg-gray-300"
+      className="cursor-pointer rounded-lg transition-all duration-100"
     >
-      Toggle
-    </button>
+      {theme === "light" ? (
+        <Image src="/svg/toggle-light.svg" alt="" width={60} height={30} />
+      ) : (
+        <Image src="/svg/toggle-dark.svg" alt="" width={60} height={30} />
+      )}
+    </div>
   );
 };
 
