@@ -4,12 +4,10 @@ import Board from "./Board/Board";
 import Keyboard from "./Keyboard/Keyboard";
 import { defaultGame, gameReducer } from "./GameReducer";
 import InstructionsDialog from "../Dialogs/InstructionsDialog";
-import { Stats } from "fs";
 import StatsDialog from "../Dialogs/StatsDialog";
 
-const GameScreen = () => {
+const GameScreen = (p: { words: string[] }) => {
   const [gameState, dispatch] = useReducer(gameReducer, defaultGame);
-  // const [isFirstVisit, setIsFirstVisit] = useState("");
 
   useEffect(() => {
     let value;
@@ -17,7 +15,6 @@ const GameScreen = () => {
     if (value !== "true") {
       dispatch({ type: "showInstructions", value: true });
       localStorage.setItem("hasVisited", "true");
-    } else {
     }
   }, []);
 
@@ -26,6 +23,19 @@ const GameScreen = () => {
       dispatch({ type: "showStats", value: true });
     }
   }, [gameState.hasWonRound]);
+
+  useEffect(() => {
+    if (gameState.currentTry === 0) {
+      const noAccentsRandomWord = p.words[Math.floor(Math.random() * p.words.length)]
+        .toUpperCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      dispatch({
+        value: noAccentsRandomWord,
+        type: "currentWord",
+      });
+    }
+  }, [p.words, gameState.currentTry]);
 
   // useEffect(() => {
   //   const timer =
