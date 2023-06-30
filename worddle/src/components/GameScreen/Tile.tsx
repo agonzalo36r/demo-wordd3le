@@ -14,15 +14,15 @@ const Tile = (p: { letter: string; status: number }) => {
 
 const tileStatusSelector = (status: number): string => {
   switch (status) {
-    case 1:
+    case 1: //correct place
       return "border-0 bg-wordle-green";
-    case 2:
+    case 2: //incorrect place
       return "border-0 bg-wordle-yellow";
-    case 3:
+    case 3: //not in word
       return "border-0 bg-wordle-gray";
-    case 4:
+    case 4: //not evaluated yet
       return "border-[1px] border-wordle-black dark:border-[#939B9F] bg-white dark:bg-transparent";
-    default:
+    default: //blank
       return "border-0 bg-wordle-gray/30 dark:bg-wordle-gray/20";
   }
 };
