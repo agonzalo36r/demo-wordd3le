@@ -21,10 +21,10 @@ export function gameReducer(state: GameType, action: GameActionType) {
         currentIndex: action.value as number,
       };
     }
-    case "elapsedSeconds": {
+    case "remainingSeconds": {
       return {
         ...state,
-        elapsedSeconds: action.value as number,
+        remainingSeconds: action.value as number,
       };
     }
     case "boardTiles": {
@@ -75,7 +75,7 @@ export function gameReducer(state: GameType, action: GameActionType) {
       return {
         ...state,
         boardTiles: copyTiles,
-        elapsedSeconds: 0 as number,
+        remainingSeconds: 300 as number,
         currentIndex: 0 as number,
         currentTry: 0 as number,
         showStats: false,
@@ -105,7 +105,7 @@ export type GameType = {
   currentWord: string;
   currentTry: number;
   currentIndex: number;
-  elapsedSeconds: number;
+  remainingSeconds: number;
   boardTiles: TileType[][];
   winScore: number;
   gameNumber: number;
@@ -119,7 +119,7 @@ export const defaultGame: GameType = {
   currentWord: "APPLE",
   currentTry: 0,
   currentIndex: 0,
-  elapsedSeconds: 0,
+  remainingSeconds: 300,
   boardTiles: JSON.parse(JSON.stringify(boardDefaultState)),
   winScore: 0,
   gameNumber: 0,

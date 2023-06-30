@@ -6,13 +6,36 @@ import { defaultGame, gameReducer } from "./GameReducer";
 import InstructionsDialog from "../Dialogs/InstructionsDialog";
 import { Stats } from "fs";
 import StatsDialog from "../Dialogs/StatsDialog";
+
 const GameScreen = () => {
   const [gameState, dispatch] = useReducer(gameReducer, defaultGame);
+  // const [isFirstVisit, setIsFirstVisit] = useState("");
+
+  useEffect(() => {
+    let value;
+    value = localStorage.getItem("hasVisited") || "";
+    if (value !== "true") {
+      dispatch({ type: "showInstructions", value: true });
+      localStorage.setItem("hasVisited", "true");
+    } else {
+    }
+  }, []);
+
   useEffect(() => {
     if (gameState.hasWonRound) {
       dispatch({ type: "showStats", value: true });
     }
   }, [gameState.hasWonRound]);
+
+  // useEffect(() => {
+  //   const timer =
+  //     gameState.remainingSeconds > 0 &&
+  //     setInterval(
+  //       () => dispatch({ value: gameState.remainingSeconds - 1, type: "remainingSeconds" }),
+  //       1000
+  //     );
+  //   return () => clearInterval(timer);
+  // }, [gameState.remainingSeconds]);
 
   return (
     <div className="grid h-full w-full grid-cols-1 grid-rows-1 justify-center">
