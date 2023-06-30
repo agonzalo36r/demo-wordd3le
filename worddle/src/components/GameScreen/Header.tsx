@@ -10,15 +10,11 @@ const Header = (p: { showStats: boolean; showInstructions: boolean; dispatch: Fu
   const handleStats = () => {
     p.dispatch({ value: !p.showStats, type: "showStats" });
     p.dispatch({ value: false, type: "showInstructions" });
-    // p.setShowStats(!p.showStats);
-    // p.setShowInstructions(false);
   };
 
   const handleInstructions = () => {
     p.dispatch({ value: !p.showInstructions, type: "showInstructions" });
     p.dispatch({ value: false, type: "showStats" });
-    // p.setShowInstructions(!p.showInstructions);
-    // p.setShowStats(false);
   };
 
   return (

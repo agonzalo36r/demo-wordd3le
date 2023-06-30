@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import Header from "./Header";
 import Board from "./Board/Board";
 import Keyboard from "./Keyboard/Keyboard";
@@ -36,16 +36,6 @@ const GameScreen = (p: { words: string[] }) => {
       });
     }
   }, [p.words, gameState.currentTry]);
-
-  // useEffect(() => {
-  //   const timer =
-  //     gameState.remainingSeconds > 0 &&
-  //     setInterval(
-  //       () => dispatch({ value: gameState.remainingSeconds - 1, type: "remainingSeconds" }),
-  //       1000
-  //     );
-  //   return () => clearInterval(timer);
-  // }, [gameState.remainingSeconds]);
 
   return (
     <div className="grid h-full w-full grid-cols-1 grid-rows-1 justify-center">

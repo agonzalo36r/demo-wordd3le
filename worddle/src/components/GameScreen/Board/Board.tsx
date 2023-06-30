@@ -1,9 +1,7 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Tile from "../Tile";
 
 const Board = (p: { boardTiles: TileType[][]; currentWord: string }) => {
-  // const [boardState, dispatch] = useReducer(boardReducer, boardDefaultState);
-  const currentWord = "apple";
   return (
     <div className="mx-auto flex flex-col gap-y-[11px] py-5">
       {p.boardTiles.map((boardRow, index) => (

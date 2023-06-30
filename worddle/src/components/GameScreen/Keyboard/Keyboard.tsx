@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import { DeleteKey, EnterKey, WordleKey } from "./Key";
 import { TileType } from "../Board/Board";
 import { GameActionType, GameType } from "../GameReducer";
